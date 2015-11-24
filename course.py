@@ -27,7 +27,7 @@ def to_twelve(time):
 
 
 class Course:
-    def __init__(self, title, course, section, typ, cred, location, days, time,
+    def __init__(self, title, code, section, typ, cred, location, days, time,
                  instructor, notes=None):
         """
         :param title: Title of course: 'Eng Compt ++'
@@ -43,20 +43,19 @@ class Course:
         :return:
         """
         self.title = title
-        self.course = course.split(' ')
+        self.code = code.split(' ')
         self.section = section
         self.typ = typ
         self.cred_hrs = cred
         self.location = location
         self.days = days.split(',')
         self.time = time
-
-        self.instructor = instructor
-        self.notes = notes
-
         self.dayTime = {}
         for day in self.days:
             self.dayTime[day] = (to_twenty_four(self.time[0]), to_twenty_four(self.time[1]))
+        self.instructor = instructor
+
+        self.notes = notes
 
     def can_schedule(self, other):
         """
